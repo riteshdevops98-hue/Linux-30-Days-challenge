@@ -135,3 +135,78 @@ for server in SERVERS:
     run_commands(server)
 Step 6: Run Script
 python setup_users.py
+
+🚀 Ansible Setup: Create Users on EC2 (Server 1 & 2)
+🧭 Architecture
+Local Machine (Server 3) → Ansible control node
+Server 1 & 2 (EC2 Ubuntu) → managed nodes
+Step 1: Install Ansible (Local Machine)
+Ubuntu / WSL / Linux:
+sudo apt update
+sudo apt install ansible -y
+Mac:
+brew install ansible
+Verify:
+ansible --version
+Step 2: Prepare SSH Key
+chmod 400 key.pem
+Step 3: Create Inventory File
+nano inventory.ini
+[servers]
+54.80.245.87
+100.31.57.106
+[servers:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=key.pem
+Step 4: Test Connection
+ansible all -i inventory.ini -m ping
+Expected:
+SUCCESS
+👉 If this fails → fix SSH first
+Step 5: Create Playbook
+nano setup-users.yml
+📜 Ansible Playbook
+---
+name: Create users and group on EC2
+  hosts: servers
+  become: yes
+  tasks:
+    - name: Create devops group
+      group:
+        name: devops
+        state: present
+
+    - name: Create user rj
+      user:
+        name: rj
+        state: present
+        groups: devops
+        append: yes
+
+    - name: Create user cj
+      user:
+        name: cj
+        state: present
+        groups: devops
+        append: yes
+
+    - name: Verify rj
+      command: id rj
+      register: rj_output
+
+    - debug:
+        var: rj_output.stdout
+
+    - name: Verify cj
+      command: id cj
+      register: cj_output
+
+    - debug:
+        var: cj_output.stdout
+Step 6: Run Playbook
+ansible-playbook -i inventory.ini setup-users.yml
+
+
+Ansible is better because it automates tasks across many servers in a simple, repeatable, and error-free way without needing custom scripts or extra setup on the servers.
+
+
