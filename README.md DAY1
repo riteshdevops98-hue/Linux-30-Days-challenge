@@ -1,1 +1,84 @@
 # Linux-30-Days-challenge
+1- how to ssh via windows using git bash 
+create a .pem key while creating EC2 
+go to the .pem file using cd and run chmod 400 key.pem 
+ssh -i key.pem ubuntu@<Public-IP>
+now you are logged in
+
+2- we will create two user rj and cj in devops group in sever 1 and sevrer 2 
+# Create user rj and add to devops group 
+(Manual - Server 1 & Server 2)
+# Step 1: Connect to Server 1
+ssh server1
+# Step 2: Create user
+sudo useradd -m rj
+# Step 3: Create group
+sudo groupadd devops
+# Step 4: Add user to group
+sudo usermod -aG devops rj
+# Step 5: Connect to Server 2
+ssh server2
+# Step 6: Create user
+sudo useradd -m rj
+# Step 7: Create group
+sudo groupadd devops
+# Step 8: Add user to group
+sudo usermod -aG devops rj
+
+
+# Create users rj and cj in devops group (Shell - AWS Ubuntu EC2 on Server 1 and Server 2)
+# 🚀 EC2 Multi-Server User Setup via SSH (DevOps Practice)
+## 📌 Overview
+This project demonstrates how to automate user and group creation across multiple EC2 instances using a control server and SSH key-based authentication.
+---
+## 🧭 Architecture
+- **Server 3 (Control Machine)** → Runs the automation script  
+- **Server 1 & Server 2 (Target Servers)** → Where users and groups are created 
+---
+## 🔐 Prerequisites
+- EC2 instances are running
+- SSH key (`key.pem`) available
+- Proper network access (Security Groups configured)
+- Sudo access on target servers
+ on node chmod 400 key.pem
+Test Connectivity
+Node test both target servers:
+ssh -i key.pem ubuntu@IP
+ssh -i key.pem ubuntu@IP
+
+1- vim setup-users.sh , i
+2- cat << 'EOF' > setup-users.sh
+#!/bin/bash
+KEY="key.pem"
+USER="ubuntu"
+SERVERS=(
+"54.80.245.87"
+"100.31.57.106"
+)
+for ip in "${SERVERS[@]}"; do
+  echo "Connecting to $ip..."
+  ssh -o StrictHostKeyChecking=no -i $KEY $USER@$ip << EOF2
+set -e
+sudo groupadd devops 2>/dev/null || true
+sudo useradd -m rj 2>/dev/null || true
+sudo useradd -m cj 2>/dev/null || true
+sudo usermod -aG devops rj
+sudo usermod -aG devops cj
+id rj
+id cj
+EOF2
+  if [ $? -eq 0 ]; then
+    echo "Done on $ip"
+  else
+    echo "Failed on $ip"
+  fi
+
+  echo "------------------------------"
+done
+EOF
+3-chmod +x setup-users.sh
+4-./setup-users.sh
+
+## Create users rj and cj in devops group (python - AWS Ubuntu EC2 on Server 1 and Server 2)
+
+
