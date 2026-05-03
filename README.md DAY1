@@ -80,5 +80,58 @@ EOF
 4-./setup-users.sh
 
 ## Create users rj and cj in devops group (python - AWS Ubuntu EC2 on Server 1 and Server 2)
+## 📌 Overview
+Step 1: Install venv
+sudo apt update
+sudo apt install python3-venv -y
+Step 2: Create virtual environment
+python3 -m venv myenv
+Step 3: Activate it
+source myenv/bin/activate
+Step 4: Install Paramiko
+pip install paramiko
+Step 5: Create Python Script
+nano setup_users.py
+import paramiko
+KEY_FILE = "key.pem"
+USER = "ubuntu"
+SERVERS = [
+    "54.80.245.87",
+    "100.31.57.106"
+]
+COMMANDS = [
+    "sudo groupadd devops 2>/dev/null || true",
+    "sudo useradd -m rj 2>/dev/null || true",
+    "sudo useradd -m cj 2>/dev/null || true",
+    "sudo usermod -aG devops rj",
+    "sudo usermod -aG devops cj",
+    "id rj",
+    "id cj"
+]
+def run_commands(ip):
+    print(f"Connecting to {ip}...")
 
+    key = paramiko.RSAKey.from_private_key_file(KEY_FILE)
 
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+    try:
+        ssh.connect(hostname=ip, username=USER, pkey=key)
+
+        for cmd in COMMANDS:
+            stdin, stdout, stderr = ssh.exec_command(cmd)
+            print(stdout.read().decode())
+
+        print(f"Done on {ip}")
+
+    except Exception as e:
+        print(f"Failed on {ip}: {e}")
+
+    finally:
+        ssh.close()
+
+for server in SERVERS:
+    run_commands(server)
+Step 6: Run Script
+python setup_users.py
