@@ -1,1 +1,16 @@
+# Linux-30-Days-challenge
+Hands-On Tasks (Try Yourself)
+Task 1: Create a User with Non-Interactive Shell
+Create a user who cannot log in to the system (used for services).
+sudo useradd -s /sbin/nologin ammar
+Verify: grep ammar /etc/passwd
 
+Task 2: Create a Service User without Home Directory
+Create a lightweight user without a home folder.
+sudo useradd -M serviceuser
+Check: ls /home
+
+Task 3: Create a Temporary User with Expiry
+Create a user that automatically expires after a specific date.
+sudo useradd -e 2026-12-31 tempuser
+Verify expiry: chage -l tempuser
