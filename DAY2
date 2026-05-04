@@ -14,3 +14,18 @@ Task 3: Create a Temporary User with Expiry
 Create a user that automatically expires after a specific date.
 sudo useradd -e 2026-12-31 tempuser
 Verify expiry: chage -l tempuser
+
+Notes-
+adduser vs useradd (Simple Difference)
+adduser
+Easy to use
+Asks questions (password, name, etc.)
+Creates home directory automatically
+Used for normal users (humans)
+useradd
+No questions (runs directly)
+Gives full control (you decide options)
+Used for scripts, automation, service users
+Simple way to remember
+adduser → for humans
+useradd → for automation
