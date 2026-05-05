@@ -1,1 +1,45 @@
+⚙️ Hands-On Tasks – Day 3 (DevOps Beginner Series)
+🔹 1. Linux User Data Transfer
 
+Simulate transferring user data between directories.
+
+# Create user data directory
+mkdir -p /tmp/dev/user1
+
+# Create sample file
+touch /tmp/dev/user1/data.txt
+
+# Create backup directory
+mkdir -p /tmp/backup/
+
+# Move data to backup
+mv /tmp/dev/user1/data.txt /tmp/backup/
+🔹 2. Secure Root SSH Access
+
+Disable root login via SSH (security best practice).
+
+# Open SSH configuration file
+sudo vim /etc/ssh/sshd_config
+
+# Find and update this line:
+PermitRootLogin no
+# Restart SSH service
+sudo systemctl restart sshd
+🔹 3. Data Backup for Developer
+
+Create backup before deployment (rollback safety).
+
+# Create backup directory
+mkdir -p /backup
+
+# Copy project data
+cp -r /home/user/project /backup/
+
+# Rename backup version
+mv /backup/project /backup/project_v1
+🎯 Goal
+Practice safe file movement
+Understand deletion risks
+Learn real-world backup strategies
+
+👉 These tasks simulate real DevOps operations used in production systems.
