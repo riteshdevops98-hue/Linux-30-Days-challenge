@@ -1,0 +1,97 @@
+# ⚙️ Day 4 – Hands-On Tasks
+
+## 🔹 Task 1 – Script Execution Permissions
+
+### Objective
+Learn how to make scripts executable and run them securely in Linux.
+
+### Commands Used
+```bash
+# Create script
+vim deploy.sh
+
+# Add script content
+echo "echo Deployment Started" > deploy.sh
+
+# Check permissions
+ls -l deploy.sh
+
+# Give execute permission
+chmod +x deploy.sh
+
+# Run script
+./deploy.sh
+```
+
+### Learning Outcome
+- Understanding execute permissions
+- Running shell scripts securely
+- Basic Linux permission management
+
+---
+
+## 🔹 Task 2 – File Permission Correction
+
+### Objective
+Fix incorrect file permissions using chmod.
+
+### Commands Used
+```bash
+# Create sample file
+touch secure.txt
+
+# Remove all permissions
+chmod 000 secure.txt
+
+# Verify permissions
+ls -l secure.txt
+
+# Correct permissions
+chmod 644 secure.txt
+
+# Verify updated permissions
+ls -l secure.txt
+```
+
+### Learning Outcome
+- Identifying permission issues
+- Restoring proper file access
+- Understanding secure permission practices
+
+---
+
+## 🔹 Task 3 – String Replacement
+
+### Objective
+Replace text inside files using sed.
+
+### Commands Used
+```bash
+# Create sample config file
+echo "Environment=dev" > config.txt
+
+# View file content
+cat config.txt
+
+# Replace string
+sed -i 's/dev/prod/g' config.txt
+
+# Verify changes
+cat config.txt
+```
+
+### Learning Outcome
+- Automating text replacement
+- Updating configuration values efficiently
+- Using sed for DevOps automation tasks
+
+---
+
+# 🚀 Real DevOps Relevance
+
+These tasks simulate real production-level activities:
+- Managing script execution permissions
+- Fixing permission-related issues
+- Updating configuration files during deployments
+
+Mastering these Linux basics helps build strong foundations for DevOps, Cloud, and Automation roles.
