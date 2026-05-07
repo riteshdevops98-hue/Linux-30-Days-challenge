@@ -1,0 +1,88 @@
+# 🚀 Day 5 – Searching, Security & System Configuration
+
+Today’s tasks focused on:
+- File Searching Operations
+- Pattern Matching in Logs
+- Recursive Search Techniques
+- Large File Identification
+- Secure Data Transfer
+- Restrict Cron Access
+- Default GUI Boot Configuration
+
+# 🔍 File Searching Operations
+
+## find
+Used to search files and directories based on conditions.
+
+### Search .txt files
+```bash
+find /home -name "*.txt"
+Search only files
+find . -type f
+Search only directories
+find . -type d
+Search files larger than 1MB
+find . -type f -size +1M
+Search recently modified files
+find . -mtime -1
+🔎 Pattern Matching in Logs
+grep
+
+Used to search specific words or patterns inside files.
+
+Search for ERROR logs
+grep "ERROR" app.log
+Case-insensitive search
+grep -i "failed" app.log
+Show line numbers
+grep -n "warning" app.log
+Count matching lines
+grep -c "ERROR" app.log
+🔁 Recursive Search Techniques
+grep -r
+
+Search text recursively inside directories.
+
+Recursive search
+grep -r "database" .
+Recursive search with line numbers
+grep -rn "server" .
+📦 Large File Identification
+Find files larger than 100MB
+find / -type f -size +100M
+Human-readable disk usage
+du -sh *
+Sort files by size
+du -ah . | sort -rh | head -10
+🔐 Secure Data Transfer
+scp
+
+Securely copy files between systems over SSH.
+
+Copy file to remote server
+scp file.txt user@server:/tmp/
+Copy directory recursively
+scp -r project/ user@server:/opt/
+⏰ Restrict Cron Access
+Allow a user
+echo "devops" >> /etc/cron.allow
+Deny a user
+echo "testuser" >> /etc/cron.deny
+🖥️ Default GUI Boot Configuration
+Set GUI target
+systemctl set-default graphical.target
+Check current boot target
+systemctl get-default
+📌 Day 5 Summary
+
+Today I practiced:
+
+File searching
+Log pattern matching
+Recursive searching
+Large file identification
+Secure file transfer
+Cron access restriction
+GUI boot configuration
+
+#Linux #DevOps #LinuxCommands #Cloud #SRE #Automation #LearningInPublic
