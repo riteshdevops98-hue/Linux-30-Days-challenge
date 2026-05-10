@@ -1,0 +1,304 @@
+
+## 📖 Overview
+
+This hands-on lab covers important Linux security and system administration tasks commonly used in real-world DevOps and production environments.
+
+---
+
+# 🛠️ Topics Covered
+
+- Linux File Permissions
+- Ownership Management
+- File Operations
+- Firewall Security
+- SELinux Basics
+- Timezone Management
+- Process Limits
+- Real-world Security Practices
+
+---
+
+# 🔹 1. Linux File Permissions
+
+## Change File Permissions
+
+```bash
+chmod 755 deploy.sh
+chmod 644 config.txt
+chmod -R 750 /secure-data
+```
+
+## Permission Breakdown
+
+| Permission | Meaning |
+|------------|----------|
+| 755 | Owner can read/write/execute, others can read/execute |
+| 644 | Owner can read/write, others can only read |
+| 750 | Secure access for owner and group only |
+
+---
+
+# 🔹 2. Ownership Management
+
+## Change Ownership
+
+```bash
+chown dev1:projectteam app.log
+chown -R deployuser:deployuser /deployments
+```
+
+## Verify Ownership
+
+```bash
+ls -l
+```
+
+---
+
+# 🔹 3. File Operations
+
+## Copy Files
+
+```bash
+cp app.conf backup.conf
+```
+
+## Move/Rename Files
+
+```bash
+mv old.log archived.log
+```
+
+## Remove Files & Directories
+
+```bash
+rm -rf temp/
+```
+
+## Search Files
+
+```bash
+find /projects -name "*.log"
+```
+
+---
+
+# 🔹 4. Firewall Security
+
+## Enable Firewall
+
+```bash
+sudo ufw enable
+```
+
+## Allow SSH & HTTP
+
+```bash
+sudo ufw allow 22
+sudo ufw allow 80
+```
+
+## Check Firewall Status
+
+```bash
+sudo ufw status
+```
+
+---
+
+# 🔹 5. SELinux Basics
+
+## Check SELinux Status
+
+```bash
+getenforce
+sestatus
+```
+
+## Disable SELinux Temporarily
+
+```bash
+sudo setenforce 0
+```
+
+## Enable SELinux Again
+
+```bash
+sudo setenforce 1
+```
+
+---
+
+# 🔹 6. Timezone Management
+
+## Check Current Timezone
+
+```bash
+timedatectl
+```
+
+## Set Timezone
+
+```bash
+sudo timedatectl set-timezone Asia/Kolkata
+```
+
+## Verify Timezone
+
+```bash
+timedatectl
+```
+
+---
+
+# 🔹 7. Process Limits
+
+## Check Current Limits
+
+```bash
+ulimit -a
+```
+
+## Increase Open File Limit
+
+```bash
+ulimit -n 4096
+```
+
+---
+
+# 🔹 8. Real-world Security Practices
+
+## Monitor Failed Login Attempts
+
+```bash
+lastb
+faillog
+```
+
+## Check Active Users
+
+```bash
+who
+w
+```
+
+## View System Users
+
+```bash
+cat /etc/passwd
+```
+
+---
+
+# 🔹 9. Secure SSH Configuration
+
+## Edit SSH Config
+
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+
+## Recommended Settings
+
+```bash
+PermitRootLogin no
+PasswordAuthentication yes
+```
+
+## Restart SSH Service
+
+```bash
+sudo systemctl restart ssh
+```
+
+---
+
+# 🔹 10. Check Open Ports
+
+## View Listening Ports
+
+```bash
+ss -tulnp
+```
+
+## Alternative Command
+
+```bash
+netstat -tulnp
+```
+
+---
+
+# 🎯 Hands-On Lab Outcome
+
+By completing this lab, you practiced:
+
+- Linux file permissions
+- Ownership & access management
+- File operations
+- Firewall configuration
+- SELinux basics
+- SSH security practices
+- Timezone management
+- Process & resource limits
+- Security auditing basics
+
+---
+
+# 🚀 Real-world DevOps Use Cases
+
+- Securing production Linux servers
+- Managing user & group access
+- Protecting SSH access
+- Monitoring suspicious login attempts
+- Configuring firewall rules
+- Managing system resource limits
+- Hardening cloud-based Linux environments
+
+---
+
+# 🛠️ Prerequisites
+
+- Linux VM / Ubuntu / CentOS
+- Basic Linux command knowledge
+- sudo access
+
+---
+
+# 📂 Project Structure
+
+```bash
+linux-security-lab/
+│
+├── permissions/
+├── ownership/
+├── firewall/
+├── selinux/
+├── ssh-security/
+└── monitoring/
+```
+
+---
+
+# 📌 Author
+
+## Ritesh Jaswal
+
+DevOps & Cloud Enthusiast 🚀
+
+---
+
+# ⭐ Support
+
+If you found this helpful:
+
+- Star this repository ⭐
+- Fork the project 🍴
+- Share with other Linux learners 🚀
+
+---
+
+# 📢 Connect
+
+Follow the Linux + DevOps Journey 🚀
