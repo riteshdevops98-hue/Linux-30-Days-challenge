@@ -1,0 +1,145 @@
+# 🎯 Hands-On Lab Outcome
+
+By completing this lab, you practiced:
+
+---
+
+## ✔ Linux User Management
+
+### Create Users
+```bash
+sudo adduser dev1
+sudo adduser qa1
+sudo adduser intern1
+```
+
+### Verify Users
+```bash
+cat /etc/passwd
+id dev1
+```
+
+---
+
+## ✔ Group-based Access Control
+
+### Create Group
+```bash
+sudo groupadd projectteam
+```
+
+### Add Users to Group
+```bash
+sudo usermod -aG projectteam dev1
+sudo usermod -aG projectteam qa1
+```
+
+### Verify Group Membership
+```bash
+groups dev1
+groups qa1
+```
+
+---
+
+## ✔ Real-world Project Directory Management
+
+### Create Project Structure
+```bash
+sudo mkdir -p /projects/ecommerce-app/logs
+sudo mkdir -p /projects/ecommerce-app/releases
+```
+
+### Verify Directory Structure
+```bash
+tree /projects
+```
+
+---
+
+## ✔ Deployment User Configuration
+
+### Create Deployment User
+```bash
+sudo useradd -m -s /bin/bash deployuser
+```
+
+### Grant Sudo Access
+```bash
+sudo usermod -aG sudo deployuser
+```
+
+### Verify User Details
+```bash
+id deployuser
+```
+
+---
+
+## ✔ Secure Permissions Setup
+
+### Assign Ownership
+```bash
+sudo chown -R :projectteam /projects/ecommerce-app
+```
+
+### Set Secure Permissions
+```bash
+sudo chmod -R 775 /projects/ecommerce-app
+```
+
+### Verify Permissions
+```bash
+ls -ld /projects/ecommerce-app
+```
+
+---
+
+## ✔ Production-style Deployment Simulation
+
+### Switch User
+```bash
+su dev1
+```
+
+### Create Release File
+```bash
+touch /projects/ecommerce-app/releases/v1-release.txt
+```
+
+### Write Deployment Logs
+```bash
+echo "Deployment Successful" >> /projects/ecommerce-app/logs/deploy.log
+```
+
+### Verify Deployment Files
+```bash
+cat /projects/ecommerce-app/logs/deploy.log
+```
+
+---
+
+## ✔ Security Auditing Basics
+
+### Check Logged-in Users
+```bash
+who
+w
+```
+
+### View Login History
+```bash
+last
+```
+
+### Lock User Account
+```bash
+sudo passwd -l intern1
+```
+
+### Force Password Change
+```bash
+sudo chage -d 0 dev1
+```
+
+---
